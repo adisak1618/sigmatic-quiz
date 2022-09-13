@@ -3,4 +3,8 @@ const withImages = require("next-images");
 
 module.exports = withImages(withTM({
   reactStrictMode: true,
+  env: {
+    // eslint-disable-next-line turbo/no-undeclared-env-vars
+    GQL_URL: process.env.GQL_URL
+  }
 }));
