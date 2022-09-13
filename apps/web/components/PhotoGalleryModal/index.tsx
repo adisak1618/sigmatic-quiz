@@ -17,7 +17,11 @@ export const PhotoGalleryModal = ({
   onClose,
 }: PhotoGalleryModalProps) => {
   return (
-    <Modal title={photo?.author} isOpen={!!photo} onClose={onClose}>
+    <Modal
+      title={`Upload by ${photo?.author}`}
+      isOpen={!!photo}
+      onClose={onClose}
+    >
       <div>
         {photo && (
           <div>
