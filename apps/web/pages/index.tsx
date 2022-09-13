@@ -1,11 +1,13 @@
 import { Button } from "ui";
-import { MainLayout } from "@/components/Layout"
+import { MainLayout } from "@/components/Layout";
+import { Header } from "@/container/home/header";
+import { Body } from "@/container/home/body";
 
 export default function Web() {
   return (
     <MainLayout>
-      <h1 className="text-header1 font-semibold">Photo</h1>
-      <Button />
+      <Header />
+      <Body />
     </MainLayout>
   );
 }

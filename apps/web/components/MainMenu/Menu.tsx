@@ -24,7 +24,7 @@ export const MenuLink = ({
         className={clsx(
           "text-body4 font-normal flex gap-2",
           transparent ? "text-white" : "text-gray-9",
-          isActive && "font-semibold",
+          isActive && "font-bold",
           isScroll && transparent && "text-gray-9",
           isScroll && isActive && "text-emerald-5",
           !transparent && isActive && "text-emerald-5",
