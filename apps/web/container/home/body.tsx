@@ -52,9 +52,7 @@ export const Body = () => {
               <div className="bg-gray-9 px-4 py-2 bg-opacity-25 hover:bg-opacity-50 w-full">
                 <p className="text-white text-body3">Author: {photo.author}</p>
                 <p className="text-white text-body5 line-clamp-2">
-                  The internet’s source of freely-usable images. Powered by
-                  creators everywhere. The internet’s source of freely-usable
-                  images. Powered by creators everywhere.
+                  {photo.description}
                 </p>
               </div>
             </div>
