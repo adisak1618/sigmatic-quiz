@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/image";
+import { usePhotosQuery } from "../../graphql/generated";
 import { BgImg } from "ui";
 
 const photos = [
@@ -29,10 +29,11 @@ const photos = [
   },
 ];
 export const Body = () => {
+  const { data, loading } = usePhotosQuery();
   return (
     <div className="container mx-auto">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 p-4">
-        {photos.map((photo) => (
+        {data?.photos.map((photo) => (
           <div className={`bg-red-4 pt-[60%] relative cursor-pointer`}>
             <BgImg
               src={photo.url}
