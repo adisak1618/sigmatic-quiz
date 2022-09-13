@@ -432,7 +432,7 @@ export type PhotosQuery = { __typename?: 'query_root', photos: Array<{ __typenam
 export const PhotosDocument = gql`
     query Photos($keyword: String!) {
   photos(
-    where: {_or: [{author: {_ilike: $keyword}}, {description: {_ilike: $keyword}}]}
+    where: {_or: [{author: {_like: $keyword}}, {description: {_like: $keyword}}]}
   ) {
     id
     author

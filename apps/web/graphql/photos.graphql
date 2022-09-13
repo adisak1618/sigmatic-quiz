@@ -1,6 +1,6 @@
 query Photos($keyword: String!) {
-  photos(where: {_or: [{author: {_ilike: $keyword}}, {description: {
-    _ilike: $keyword
+  photos(where: {_or: [{author: {_like: $keyword}}, {description: {
+    _like: $keyword
   }}]}) {
     id
     author
