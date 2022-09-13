@@ -1,12 +1,20 @@
-query Photos($keyword: String!) {
+query Photos($keyword: String!, $offset: Int!, $limit: Int!) {
   photos(where: {_or: [{author: {_like: $keyword}}, {description: {
     _like: $keyword
-  }}]}) {
+  }}]}, offset: $offset, limit: $limit ) {
     id
     author
     url
     description
     created_at
     updated_at
+  }
+  
+  photos_aggregate(where: {_or: [{author: {_like: $keyword}}, {description: {
+    _like: $keyword
+  }}]}) {
+    aggregate {
+      count
+    }
   }
 }

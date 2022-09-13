@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { usePhotosQuery } from "../../graphql/generated";
-import { BgImg } from "ui";
+import { BgImg, Pagination } from "ui";
 import { useRouter } from "next/router";
 import { searchContext } from "./searchContext";
 import { PhotoGalleryModal, PhotoProps } from "@/components/PhotoGalleryModal";
@@ -31,13 +31,18 @@ const photos = [
     author: "Nati Melnychuk",
   },
 ];
+
+const PAGE_SIZE = 6;
 export const Body = () => {
+  const [page, setPage] = useState(0);
   const [photo, setPhoto] = useState<PhotoProps | null>(null);
   const { data: searchContextData } = useContext(searchContext);
   const router = useRouter();
   const { data } = usePhotosQuery({
     variables: {
       keyword: `%${searchContextData.search || ""}%`,
+      limit: PAGE_SIZE,
+      offset: page * PAGE_SIZE,
     },
   });
 
@@ -70,6 +75,17 @@ export const Body = () => {
             </div>
           </div>
         ))}
+      </div>
+      <div className="flex justify-center">
+        {data?.photos_aggregate.aggregate?.count && (
+          <Pagination
+            pageCount={data?.photos_aggregate.aggregate?.count / PAGE_SIZE}
+            onPageChange={(page) => {
+              console.log("page", page);
+              setPage(page.selected);
+            }}
+          />
+        )}
       </div>
       <PhotoGalleryModal photo={photo} onClose={() => setPhoto(null)} />
     </div>

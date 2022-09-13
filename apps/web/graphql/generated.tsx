@@ -430,10 +430,12 @@ export type InsertPhotoMutation = { __typename?: 'mutation_root', insert_photos_
 
 export type PhotosQueryVariables = Exact<{
   keyword: Scalars['String'];
+  offset: Scalars['Int'];
+  limit: Scalars['Int'];
 }>;
 
 
-export type PhotosQuery = { __typename?: 'query_root', photos: Array<{ __typename?: 'photos', id: any, author: string, url: string, description: string, created_at: any, updated_at: any }> };
+export type PhotosQuery = { __typename?: 'query_root', photos: Array<{ __typename?: 'photos', id: any, author: string, url: string, description: string, created_at: any, updated_at: any }>, photos_aggregate: { __typename?: 'photos_aggregate', aggregate?: { __typename?: 'photos_aggregate_fields', count: number } | null } };
 
 
 export const InsertPhotoDocument = gql`
@@ -475,9 +477,11 @@ export type InsertPhotoMutationHookResult = ReturnType<typeof useInsertPhotoMuta
 export type InsertPhotoMutationResult = Apollo.MutationResult<InsertPhotoMutation>;
 export type InsertPhotoMutationOptions = Apollo.BaseMutationOptions<InsertPhotoMutation, InsertPhotoMutationVariables>;
 export const PhotosDocument = gql`
-    query Photos($keyword: String!) {
+    query Photos($keyword: String!, $offset: Int!, $limit: Int!) {
   photos(
     where: {_or: [{author: {_like: $keyword}}, {description: {_like: $keyword}}]}
+    offset: $offset
+    limit: $limit
   ) {
     id
     author
@@ -485,6 +489,13 @@ export const PhotosDocument = gql`
     description
     created_at
     updated_at
+  }
+  photos_aggregate(
+    where: {_or: [{author: {_like: $keyword}}, {description: {_like: $keyword}}]}
+  ) {
+    aggregate {
+      count
+    }
   }
 }
     `;
@@ -502,6 +513,8 @@ export const PhotosDocument = gql`
  * const { data, loading, error } = usePhotosQuery({
  *   variables: {
  *      keyword: // value for 'keyword'
+ *      offset: // value for 'offset'
+ *      limit: // value for 'limit'
  *   },
  * });
  */

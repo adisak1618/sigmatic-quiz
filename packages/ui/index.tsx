@@ -9,3 +9,4 @@ export * from "./BgImg";
 export * from "./Input";
 export * from "./FormikInput";
 export * from "./Modal";
+export * from "./Pagination";
