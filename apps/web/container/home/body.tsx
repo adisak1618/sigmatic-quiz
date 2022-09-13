@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { usePhotosQuery } from "../../graphql/generated";
 import { BgImg } from "ui";
+import { useRouter } from "next/router";
+import { searchContext } from "./searchContext";
 
 const photos = [
   {
@@ -29,7 +31,14 @@ const photos = [
   },
 ];
 export const Body = () => {
-  const { data, loading } = usePhotosQuery();
+  const { data: searchContextData } = useContext(searchContext);
+  const router = useRouter();
+  const { data } = usePhotosQuery({
+    variables: {
+      keyword: `%${searchContextData.search || ""}%`,
+    },
+  });
+
   return (
     <div className="container mx-auto">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 p-4">

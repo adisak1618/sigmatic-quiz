@@ -421,15 +421,19 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
-export type PhotosQueryVariables = Exact<{ [key: string]: never; }>;
+export type PhotosQueryVariables = Exact<{
+  keyword: Scalars['String'];
+}>;
 
 
 export type PhotosQuery = { __typename?: 'query_root', photos: Array<{ __typename?: 'photos', id: any, author: string, url: string, description: string, created_at: any, updated_at: any }> };
 
 
 export const PhotosDocument = gql`
-    query Photos {
-  photos {
+    query Photos($keyword: String!) {
+  photos(
+    where: {_or: [{author: {_ilike: $keyword}}, {description: {_ilike: $keyword}}]}
+  ) {
     id
     author
     url
@@ -452,10 +456,11 @@ export const PhotosDocument = gql`
  * @example
  * const { data, loading, error } = usePhotosQuery({
  *   variables: {
+ *      keyword: // value for 'keyword'
  *   },
  * });
  */
-export function usePhotosQuery(baseOptions?: Apollo.QueryHookOptions<PhotosQuery, PhotosQueryVariables>) {
+export function usePhotosQuery(baseOptions: Apollo.QueryHookOptions<PhotosQuery, PhotosQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<PhotosQuery, PhotosQueryVariables>(PhotosDocument, options);
       }
