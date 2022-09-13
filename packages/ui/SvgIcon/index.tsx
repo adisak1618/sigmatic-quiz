@@ -2,7 +2,7 @@ import React from "react";
 
 import { BgImg } from "../BgImg";
 
-export type IconType = "camera";
+export type IconType = "camera" | "xClose";
 
 interface IconProps {
   icon: IconType;
@@ -16,6 +16,7 @@ type IconsResourceProps = {
 
 const icons: IconsResourceProps = {
   camera: require("./assets/camera.svg"),
+  xClose: require("./assets/x-close.svg"),
 };
 
 export const SvgIcon = ({

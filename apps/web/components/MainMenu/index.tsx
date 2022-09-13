@@ -1,10 +1,9 @@
 import React from "react";
 import { MenuLink } from "./Menu";
-import { useRouter } from "next/router";
 import { SvgIcon } from "ui";
+import { NewPhotoModal } from "../NewPhotoModal";
 
 export const MainMenu = () => {
-  const router = useRouter();
   return (
     <div className="bg-white shadow-md border-b border-gray-2 px-4">
       <div className="container mx-auto">
@@ -20,7 +19,7 @@ export const MainMenu = () => {
           <div className="hidden sm:block">
             <MenuLink link="/">Discover</MenuLink>
           </div>
-          <MenuLink link="/contact">Contact</MenuLink>
+          <NewPhotoModal />
         </div>
       </div>
     </div>

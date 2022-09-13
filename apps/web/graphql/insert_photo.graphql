@@ -1,0 +1,10 @@
+mutation InsertPhoto($input: photos_insert_input!) {
+  insert_photos_one(object: $input) {
+    id
+    author
+    description
+    url
+    created_at
+    updated_at
+  }
+}

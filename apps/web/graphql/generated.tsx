@@ -421,6 +421,13 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
+export type InsertPhotoMutationVariables = Exact<{
+  input: Photos_Insert_Input;
+}>;
+
+
+export type InsertPhotoMutation = { __typename?: 'mutation_root', insert_photos_one?: { __typename?: 'photos', id: any, author: string, description: string, url: string, created_at: any, updated_at: any } | null };
+
 export type PhotosQueryVariables = Exact<{
   keyword: Scalars['String'];
 }>;
@@ -429,6 +436,44 @@ export type PhotosQueryVariables = Exact<{
 export type PhotosQuery = { __typename?: 'query_root', photos: Array<{ __typename?: 'photos', id: any, author: string, url: string, description: string, created_at: any, updated_at: any }> };
 
 
+export const InsertPhotoDocument = gql`
+    mutation InsertPhoto($input: photos_insert_input!) {
+  insert_photos_one(object: $input) {
+    id
+    author
+    description
+    url
+    created_at
+    updated_at
+  }
+}
+    `;
+export type InsertPhotoMutationFn = Apollo.MutationFunction<InsertPhotoMutation, InsertPhotoMutationVariables>;
+
+/**
+ * __useInsertPhotoMutation__
+ *
+ * To run a mutation, you first call `useInsertPhotoMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useInsertPhotoMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [insertPhotoMutation, { data, loading, error }] = useInsertPhotoMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useInsertPhotoMutation(baseOptions?: Apollo.MutationHookOptions<InsertPhotoMutation, InsertPhotoMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<InsertPhotoMutation, InsertPhotoMutationVariables>(InsertPhotoDocument, options);
+      }
+export type InsertPhotoMutationHookResult = ReturnType<typeof useInsertPhotoMutation>;
+export type InsertPhotoMutationResult = Apollo.MutationResult<InsertPhotoMutation>;
+export type InsertPhotoMutationOptions = Apollo.BaseMutationOptions<InsertPhotoMutation, InsertPhotoMutationVariables>;
 export const PhotosDocument = gql`
     query Photos($keyword: String!) {
   photos(
