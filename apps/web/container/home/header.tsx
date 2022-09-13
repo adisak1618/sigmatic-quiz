@@ -18,6 +18,7 @@ export const Header = () => {
             onChange={(e) => {
               update({ search: e.target.value });
             }}
+            placeholder="Search Free photos"
           />
         </div>
       </div>
