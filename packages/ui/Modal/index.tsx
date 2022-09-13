@@ -58,7 +58,7 @@ export const Modal = ({
             >
               <Dialog.Panel
                 className={clsx(
-                  "mx-auto flex h-screen max-h-screen w-full transform text-left align-middle transition-all md:h-auto md:max-w-md md:p-4",
+                  "mx-auto flex h-screen max-h-screen w-full transform text-left align-middle transition-all md:h-auto md:max-w-5xl md:p-4",
                   compact ? "!h-auto" : ""
                 )}
               >
