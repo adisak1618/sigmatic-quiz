@@ -77,15 +77,13 @@ export const Body = () => {
         ))}
       </div>
       <div className="flex justify-center">
-        {data?.photos_aggregate.aggregate?.count && (
-          <Pagination
-            pageCount={data?.photos_aggregate.aggregate?.count / PAGE_SIZE}
-            onPageChange={(page) => {
-              console.log("page", page);
-              setPage(page.selected);
-            }}
-          />
-        )}
+        <Pagination
+          pageCount={(data?.photos_aggregate.aggregate?.count || 0) / PAGE_SIZE}
+          onPageChange={(page) => {
+            console.log("page", page);
+            setPage(page.selected);
+          }}
+        />
       </div>
       <PhotoGalleryModal photo={photo} onClose={() => setPhoto(null)} />
     </div>
