@@ -479,7 +479,7 @@ export type InsertPhotoMutationOptions = Apollo.BaseMutationOptions<InsertPhotoM
 export const PhotosDocument = gql`
     query Photos($keyword: String!, $offset: Int!, $limit: Int!) {
   photos(
-    where: {_or: [{author: {_like: $keyword}}, {description: {_like: $keyword}}]}
+    where: {_or: [{author: {_ilike: $keyword}}, {description: {_ilike: $keyword}}]}
     offset: $offset
     limit: $limit
   ) {
@@ -491,7 +491,7 @@ export const PhotosDocument = gql`
     updated_at
   }
   photos_aggregate(
-    where: {_or: [{author: {_like: $keyword}}, {description: {_like: $keyword}}]}
+    where: {_or: [{author: {_ilike: $keyword}}, {description: {_ilike: $keyword}}]}
   ) {
     aggregate {
       count
