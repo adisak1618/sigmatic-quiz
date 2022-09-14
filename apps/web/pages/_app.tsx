@@ -9,7 +9,10 @@ const client = new ApolloClient({
   cache: cache,
   // eslint-disable-next-line turbo/no-undeclared-env-vars
   uri: process.env.GQL_URL,
-
+  headers: {
+    // eslint-disable-next-line turbo/no-undeclared-env-vars
+    "x-hasura-admin-secret": process.env.ADMIN_SECRET as any,
+  },
   // Provide some optional constructor fields
   name: "react-web-client",
   version: "1.3",
